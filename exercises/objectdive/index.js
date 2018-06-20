@@ -16,6 +16,6 @@
 // objectDive(testObj, ['profile', 'address', 'zip-code']) === 'No zip-code'
 // objectDive(testObj, ['profile', 'address', 'city']) === 'Austin'
 
-function objectDive(obj, arr) {}
+function objectDive(obj, keyArr) {}
 
 module.exports = objectDive;
