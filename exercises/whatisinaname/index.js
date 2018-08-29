@@ -10,7 +10,6 @@
 //   "bat": 2 })
 //   should return
 //  [{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie":2 }]
-// Hint USE .hasOwnProperty
 
 function whatIsInAName(collection, source) {}
 
