@@ -1,12 +1,12 @@
 // --- Description
 // Create a queue data structure.  The queue
-// should be a class with methods 'add' and 'remove'.
+// should be a class with methods 'enqueue' and 'dequeue'.
 // Adding to the queue should store an element until
 // it is removed
 // --- Examples
 //     const q = new Queue();
-//     q.add(1);
-//     q.remove(); // returns 1;
+//     q.enqueue(1);
+//     q.dequeue(); // returns 1;
 
 class Node {
   constructor(value) {
