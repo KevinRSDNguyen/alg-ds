@@ -1,20 +1,8 @@
 // --- Directions
-// Implement bubbleSort, selectionSort, and mergeSort
+// Implement bubbleSort and selectionSort
 
-function bubbleSort(arr) {
+function bubbleSort(arr) {}
 
-}
+function selectionSort(arr) {}
 
-function selectionSort(arr) {
-
-}
-
-function mergeSort(arr) {
-
-}
-
-function merge(left, right) {
-
-}
-
-module.exports = { bubbleSort, selectionSort, mergeSort };
+module.exports = { bubbleSort, selectionSort };
