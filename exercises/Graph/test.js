@@ -23,6 +23,7 @@ test("removeEdge works", () => {
   g.addVertex("Tokyo");
   g.addVertex("San Francisco");
   g.addEdge("Tokyo", "San Francisco");
+  expect(g.adjacencyList["Tokyo"][0]).toEqual("San Francisco");
   g.removeEdge("San Francisco", "Tokyo");
   expect(g.adjacencyList["Tokyo"][0]).toBeFalsy();
   expect(g.adjacencyList["San Francisco"].length).toEqual(0);
@@ -65,7 +66,7 @@ test.skip("depthFirst works", () => {
   expect(g.depthFirstIterative("A")).toEqual(["A", "C", "E", "F", "D", "B"]);
 });
 
-test.skip("breadthFirst works", () => {
+test("breadthFirst works", () => {
   let g = new Graph();
 
   g.addVertex("A");

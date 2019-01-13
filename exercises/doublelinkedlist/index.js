@@ -3,10 +3,10 @@
 // See 'directions' document
 
 class Node {
-  constructor(val) {
+  constructor(val, prev = null, next = null) {
     this.val = val;
-    this.next = null;
-    this.prev = null;
+    this.next = next;
+    this.prev = prev;
   }
 }
 

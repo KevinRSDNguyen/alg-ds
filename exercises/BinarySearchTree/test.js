@@ -1,6 +1,13 @@
 const { BinarySearchTree } = require("./index");
 
 describe.skip("Insert", () => {
+  test("Sets root of BST if BST has no root", () => {
+    const BST = new BinarySearchTree();
+    BST.insert(10);
+    BST.insert(1);
+    expect(BST.root.value).toEqual(10);
+  });
+
   test("Does not insert if value is equal to another value in BST", () => {
     const BST = new BinarySearchTree();
     BST.insert(10);
@@ -77,7 +84,7 @@ describe.skip("BFS", () => {
   });
 });
 
-describe.skip("DFS", () => {
+describe("DFS", () => {
   test("Works on empty tree", () => {
     const BST = new BinarySearchTree();
     expect(BST.DFS()).toEqual([]);

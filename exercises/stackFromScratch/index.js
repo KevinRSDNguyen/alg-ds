@@ -9,9 +9,9 @@
 //   s.pop(); // returns 2
 //   s.pop(); // returns 1
 class Node {
-  constructor(value) {
+  constructor(value, next = null) {
     this.value = value;
-    this.next = null;
+    this.next = next;
   }
 }
 

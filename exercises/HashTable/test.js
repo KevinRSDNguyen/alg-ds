@@ -9,14 +9,15 @@ ht.set("mediumvioletred", "#C71585");
 ht.set("plum", "#DDA0DD");
 ht.set("dupe", "#DDA0DD");
 
-test("Set works and uses seperate-chaining", () => {
+test("set() works and uses seperate-chaining to avoid collisions", () => {
   expect(ht.keyMap[0]).toBeTruthy();
   expect(ht.keyMap[2]).toBeFalsy();
   expect(ht.keyMap[8].length).toEqual(2);
 });
 
-test("get works and returns the value of key", () => {
+test("get() works and returns the value of key, or falsy value on invalid key", () => {
   expect(ht.get("yellow")).toEqual("#FFFF00");
+  expect(ht.get("woofwoof")).toBeFalsy();
 });
 
 test("keys() returns an array of all key values", () => {
