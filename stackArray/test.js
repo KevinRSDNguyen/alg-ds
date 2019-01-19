@@ -1,36 +1,33 @@
-const Stack = require('./index');
+const Stack = require("./index");
 
-test('Stack is a class', () => {
-  expect(typeof Stack.prototype.constructor).toEqual('function');
+test("push() adds elements to a stack", () => {
+  const s = new Stack();
+  s.push(1);
+  expect(s.data.includes(1)).toBeTruthy();
 });
 
-test('stack can add and remove items', () => {
+test("pop() removes element from stack and returns removed element.", () => {
   const s = new Stack();
   s.push(1);
   expect(s.pop()).toEqual(1);
-  s.push(2);
-  expect(s.pop()).toEqual(2);
+  expect(s.data.includes(1)).toBeFalsy();
 });
 
-test('stack can follows first in, last out', () => {
-  const s = new Stack();
-  s.push(1);
-  s.push(2);
-  s.push(3);
-  expect(s.pop()).toEqual(3);
-  expect(s.pop()).toEqual(2);
-  expect(s.pop()).toEqual(1);
-});
-
-test('peek returns the first element but doesnt pop it', () => {
+test("peek() returns the next element to be popped but doesnt pop it", () => {
   const s = new Stack();
   s.push(1);
   s.push(2);
   s.push(3);
   expect(s.peek()).toEqual(3);
   expect(s.pop()).toEqual(3);
-  expect(s.peek()).toEqual(2);
+});
+
+test("Stack has behavior of first in last out", () => {
+  const s = new Stack();
+  s.push(1);
+  s.push(2);
+  s.push(3);
+  expect(s.pop()).toEqual(3);
   expect(s.pop()).toEqual(2);
-  expect(s.peek()).toEqual(1);
   expect(s.pop()).toEqual(1);
 });
