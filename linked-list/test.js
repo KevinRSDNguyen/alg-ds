@@ -3,15 +3,15 @@ const List = L.LinkedList;
 const Node = L.Node;
 
 describe.skip("A Node", () => {
-  test('has properties "data" and "next"', () => {
-    const node = new Node("a", "b");
-    expect(node.data).toEqual("a");
-    expect(node.next).toEqual("b");
+  test("has properties 'data' and 'next'", () => {
+    const node = new Node(1, 2);
+    expect(node.data).toEqual(1);
+    expect(node.next).toEqual(2);
   });
 });
 
 describe.skip("unshift()", () => {
-  test("appends a node to the start of the list", () => {
+  test("adds node to start of list and correctly sets 'next' property", () => {
     const l = new List();
     l.unshift(1);
     expect(l.head.data).toEqual(1);
@@ -22,21 +22,23 @@ describe.skip("unshift()", () => {
   });
 });
 
-describe.skip("Size", () => {
-  test("returns the number of items in the linked list", () => {
+describe.skip("size()", () => {
+  test("returns number of nodes in linked list", () => {
     const l = new List();
     expect(l.size()).toEqual(0);
-    l.unshift(1);
-    l.unshift(1);
-    l.unshift(1);
-    l.unshift(1);
-    expect(l.size()).toEqual(4);
+    l.unshift("a");
+    expect(l.size()).toEqual(1);
+    l.unshift("b");
+    expect(l.size()).toEqual(2);
+    l.unshift("c");
+    expect(l.size()).toEqual(3);
   });
 });
 
-describe.skip("GetFirst", () => {
-  test("returns the first element", () => {
+describe.skip("getFirst()", () => {
+  test("returns the first node in linked list", () => {
     const l = new List();
+    expect(l.getFirst()).toBeFalsy();
     l.unshift(1);
     expect(l.getFirst().data).toEqual(1);
     l.unshift(2);
@@ -44,81 +46,76 @@ describe.skip("GetFirst", () => {
   });
 });
 
-describe.skip("GetLast", () => {
-  test("returns the last element", () => {
-    const l = new List();
-    l.unshift(2);
-    expect(l.getLast()).toEqual({ data: 2, next: null });
-    l.unshift(1);
-    expect(l.getLast()).toEqual({ data: 2, next: null });
-  });
-
-  test("returns null on empty linkedlist", () => {
+describe.skip("getLast()", () => {
+  test("does not crash AND returns falsy value on empty list.", () => {
     const l = new List();
     expect(l.getLast()).toEqual(null);
   });
+  test("returns the last node in linked list.", () => {
+    const l = new List();
+    l.unshift(1);
+    expect(l.getLast().data).toEqual(1);
+    l.unshift(2);
+    expect(l.getLast().data).toEqual(1);
+  });
 });
 
-describe.skip("Clear", () => {
-  test("empties out the list", () => {
+describe.skip("clear()", () => {
+  test("clears out the linked list", () => {
     const l = new List();
     expect(l.size()).toEqual(0);
     l.unshift(1);
     l.unshift(1);
     l.unshift(1);
-    l.unshift(1);
-    expect(l.size()).toEqual(4);
+    expect(l.size()).toEqual(3);
     l.clear();
     expect(l.size()).toEqual(0);
+    expect(l.head).toBeFalsy();
   });
 });
 
 describe.skip("shift()", () => {
-  test("shift() doesnt crash on an empty list", () => {
-    expect(() => {
-      const l = new List();
-      l.shift("a");
-    }).not.toThrow();
+  test("does not crash AND returns falsy value on empty list", () => {
+    const l = new List();
+    expect(l.shift()).toBeFalsy();
   });
 
-  test("removes the first node when the list has a size of one", () => {
+  test("removes the first node AND returns it when linked list has only one node.", () => {
     const l = new List();
-    l.unshift("a");
-    l.shift();
+    l.unshift(1);
+    expect(l.shift().data).toEqual(1);
     expect(l.size()).toEqual(0);
-    expect(l.getFirst()).toEqual(null);
+    expect(l.getFirst()).toBeFalsy();
   });
 
   test("removes the first node and returns it", () => {
     const l = new List();
-    l.unshift("c");
-    l.unshift("b");
-    l.unshift("a");
-    expect(l.shift().data).toEqual("a");
+    l.unshift(3);
+    l.unshift(2);
+    l.unshift(1);
+    expect(l.shift().data).toEqual(1);
     expect(l.size()).toEqual(2);
-    expect(l.getFirst().data).toEqual("b");
-    expect(l.shift().data).toEqual("b");
+    expect(l.getFirst().data).toEqual(2);
+    expect(l.shift().data).toEqual(2);
     expect(l.size()).toEqual(1);
-    expect(l.getFirst().data).toEqual("c");
+    expect(l.getFirst().data).toEqual(3);
   });
 });
 
 describe.skip("pop()", () => {
-  test("pop() removes the last node when list is empty", () => {
+  test("does not crash AND returns null on empty list", () => {
     const l = new List();
-    expect(() => {
-      l.pop();
-    }).not.toThrow();
+    expect(l.pop()).toEqual(null);
   });
 
-  test("pop() removes the last node when list is length 1", () => {
+  test("removes last node correctly AND returns it on linked-list with only one node", () => {
     const l = new List();
-    l.unshift("a");
-    l.pop();
+    l.unshift(1);
+    expect(l.pop().data).toEqual(1);
     expect(l.head).toEqual(null);
   });
 
-  test("pop() removes the last node AND returns the removed node.", () => {
+  test("removes the last node AND returns the removed node.", () => {
     const l = new List();
     l.unshift("b");
     l.unshift("a");
@@ -131,28 +128,27 @@ describe.skip("pop()", () => {
 });
 
 describe.skip("push()", () => {
-  test("adds to the end of the list", () => {
-    const l = new List();
-    l.unshift("a");
-
-    l.push("b");
-
-    expect(l.size()).toEqual(2);
-    expect(l.getLast().data).toEqual("b");
-  });
-
-  test("adds to list even if empty", () => {
+  test("adds to end of empty list without crashing", () => {
     const l = new List();
 
-    l.push("b");
+    l.push(1);
 
     expect(l.size()).toEqual(1);
-    expect(l.getLast().data).toEqual("b");
+    expect(l.getLast().data).toEqual(1);
+  });
+  test("adds to the end of the list", () => {
+    const l = new List();
+    l.unshift(1);
+
+    l.push(2);
+
+    expect(l.size()).toEqual(2);
+    expect(l.getLast().data).toEqual(2);
   });
 });
 
 describe.skip("get()", () => {
-  test("Returns falsy value on negative or out of bounds index", () => {
+  test("returns falsy value on negative or out of bounds index", () => {
     const l = new List();
     l.push(2);
     expect(l.get(-1)).toBeFalsy();
@@ -165,12 +161,10 @@ describe.skip("get()", () => {
     l.push(1);
     l.push(2);
     l.push(3);
-    l.push(4);
 
     expect(l.get(0).data).toEqual(1);
     expect(l.get(1).data).toEqual(2);
     expect(l.get(2).data).toEqual(3);
-    expect(l.get(3).data).toEqual(4);
   });
 });
 
@@ -178,7 +172,7 @@ describe.skip("set()", () => {
   test("returns falsy value on out of bounds or negative index", () => {
     const l = new List();
     l.push(2);
-    expect(l.set(10, "meow")).toBeFalsy();
+    expect(l.set(1, "meow")).toBeFalsy();
     expect(l.set(-10, "meow")).toBeFalsy();
   });
   test("Updates node and returns true", () => {
@@ -198,26 +192,26 @@ describe.skip("remove()", () => {
     expect(l.remove(1)).toBeFalsy();
   });
 
-  test("removes node at index 0 correctly", () => {
+  test("removes node at index 0 AND returns removed node.", () => {
     const l = new List();
     l.push(1);
     l.push(2);
     l.push(3);
     l.push(4);
     expect(l.get(0).data).toEqual(1);
-    l.remove(0);
+    expect(l.remove(0).data).toEqual(1);
     expect(l.get(0).data).toEqual(2);
   });
 
-  test("remove deletes the node at the given index", () => {
+  test("removes the node and returns it at given index", () => {
     const l = new List();
     l.push(1);
     l.push(2);
     l.push(3);
     l.push(4);
-    expect(l.get(1).data).toEqual(2);
-    l.remove(1);
-    expect(l.get(1).data).toEqual(3);
+    expect(l.get(3).data).toEqual(4);
+    expect(l.remove(3).data).toEqual(4);
+    expect(l.get(3)).toBeFalsy();
   });
 });
 
@@ -230,28 +224,28 @@ describe.skip("insert()", () => {
 
   test("inserts node at 0 index correctly and returns true", () => {
     const l = new List();
-    l.push("a");
-    l.push("b");
-    l.push("c");
-    expect(l.insert(0, "hi")).toEqual(true);
-    expect(l.get(0).data).toEqual("hi");
-    expect(l.get(1).data).toEqual("a");
-    expect(l.get(2).data).toEqual("b");
-    expect(l.get(3).data).toEqual("c");
+    l.push(1);
+    l.push(2);
+    l.push(3);
+    expect(l.insert(0, "kevin")).toEqual(true);
+    expect(l.get(0).data).toEqual("kevin");
+    expect(l.get(1).data).toEqual(1);
+    expect(l.get(2).data).toEqual(2);
+    expect(l.get(3).data).toEqual(3);
   });
 
-  test("inserts a new node with data at a middle index", () => {
+  test("inserts a new node at given index and returns true", () => {
     const l = new List();
-    l.push("a");
-    l.push("b");
-    l.push("c");
-    l.push("d");
-    l.insert(2, "hi");
-    expect(l.get(0).data).toEqual("a");
-    expect(l.get(1).data).toEqual("b");
-    expect(l.get(2).data).toEqual("hi");
-    expect(l.get(3).data).toEqual("c");
-    expect(l.get(4).data).toEqual("d");
+    l.push(1);
+    l.push(2);
+    l.push(3);
+    l.push(4);
+    expect(l.insert(2, "kevin")).toEqual(true);
+    expect(l.get(0).data).toEqual(1);
+    expect(l.get(1).data).toEqual(2);
+    expect(l.get(2).data).toEqual("kevin");
+    expect(l.get(3).data).toEqual(3);
+    expect(l.get(4).data).toEqual(4);
   });
 });
 
@@ -271,22 +265,20 @@ describe.skip("reverse()", () => {
   });
 });
 
-describe.skip("ForEach", () => {
-  test("applies a transform to each node", () => {
+describe.skip("forEach()", () => {
+  test("calls function provided to it on each node", () => {
     const l = new List();
 
     l.push(1);
     l.push(2);
     l.push(3);
-    l.push(4);
 
     l.forEach(node => {
-      node.data += 10;
+      node.data += 1;
     });
 
-    expect(l.get(0).data).toEqual(11);
-    expect(l.get(1).data).toEqual(12);
-    expect(l.get(2).data).toEqual(13);
-    expect(l.get(3).data).toEqual(14);
+    expect(l.get(0).data).toEqual(2);
+    expect(l.get(1).data).toEqual(3);
+    expect(l.get(2).data).toEqual(4);
   });
 });
