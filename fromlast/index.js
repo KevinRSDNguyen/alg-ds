@@ -1,15 +1,13 @@
-// --- Directions
-// Given a linked list, return the element n spaces
-// from the last node in the list.  Do not call the 'size'
-// method of the linked list.  Assume that n will always
-// be less than the length of the list.
+// Without using the length property of the LinkedList,
+// return the node in a linked list that is at a given
+// number of nodes away from the end.
 // --- Examples
 //    const list = new List();
-//    list.insertLast('a');
-//    list.insertLast('b');
-//    list.insertLast('c');
-//    list.insertLast('d');
-//    fromLast(list, 2).data // 'b'
+//    list.push(1);
+//    list.push(2);
+//    list.push(3);
+//    list.push(4);
+//    fromLast(list, 1).data // 3
 
 function fromLast(list, n) {}
 

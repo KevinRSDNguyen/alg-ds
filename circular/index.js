@@ -1,16 +1,12 @@
-// --- Directions
-// Given a linked list, return true if the list
-// is circular, false if it is not.
+// Create a function that detects if a linked list is circular by
+// returning true or false
 // --- Examples
-//   const l = new List();
-//   const a = new Node('a');
-//   const b = new Node('b');
-//   const c = new Node('c');
-//   l.head = a;
-//   a.next = b;
-//   b.next = c;
-//   c.next = b;
-//   circular(l) // true
+// const l = new List();
+// l.push("a");
+// l.push("b");
+// l.push("c");
+// l.getLast().next = l.get(1);
+// circular(l) --> true
 
 function circular(list) {}
 

@@ -1,10 +1,8 @@
-// --- Directions
 // Return the 'middle' node of a linked list.
-// If the list has an even number of elements, return
-// the node at the end of the first half of the list.
-// *Do not* use a counter variable, *do not* retrieve
-// the size of the list, and only iterate
-// through the list one time.
+// Given a singly linked list, find middle of the linked list. If there
+// are even nodes, fetch the highest node of the first half. For
+// example, if given linked list is 1->2->3->4 then output should be 2.
+// Do not fetch the length of the linked list in the implementation.
 // --- Example
 //   const l = new LinkedList();
 //   l.insertLast('a')

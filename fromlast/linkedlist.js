@@ -1,3 +1,5 @@
+// Implement classes Node and Linked List
+
 class Node {
   constructor(data, next = null) {
     this.data = data;
@@ -8,146 +10,130 @@ class Node {
 class LinkedList {
   constructor() {
     this.head = null;
+    this.length = 0;
   }
-
-  insertFirst(data) {
+  unshift(data) {
     this.head = new Node(data, this.head);
+    this.length++;
   }
-
-  size() {
-    let counter = 0;
-    let node = this.head;
-
-    while (node) {
-      counter++;
-      node = node.next;
-    }
-
-    return counter;
-  }
-
   getFirst() {
     return this.head;
   }
-
   getLast() {
+    let node = this.head;
+    while (node && node.next) {
+      node = node.next;
+    }
+    return node;
+  }
+  clear() {
+    this.head = null;
+    this.length = 0;
+  }
+  shift() {
+    if (this.head) {
+      this.length--;
+    }
+    const originalHead = this.head;
+    this.head = this.head ? this.head.next : null;
+    return originalHead;
+  }
+  pop() {
     if (!this.head) {
       return null;
     }
-
+    if (this.length === 1) {
+      return this.shift();
+    }
     let node = this.head;
-    while (node) {
-      if (!node.next) {
-        return node;
-      }
-      node = node.next;
-    }
-  }
-
-  clear() {
-    this.head = null;
-  }
-
-  removeFirst() {
-    if (!this.head) {
-      return;
-    }
-
-    this.head = this.head.next;
-  }
-
-  removeLast() {
-    if (!this.head) {
-      return;
-    }
-
-    if (!this.head.next) {
-      this.head = null;
-      return;
-    }
-
-    let previous = this.head;
-    let node = this.head.next;
-    while (node.next) {
-      previous = node;
-      node = node.next;
-    }
-    previous.next = null;
-  }
-
-  insertLast(data) {
     const last = this.getLast();
-
-    if (last) {
-      // There are some existing nodes in our chain
-      last.next = new Node(data);
-    } else {
-      // The chain is empty!
-      this.head = new Node(data);
-    }
-  }
-
-  getAt(index) {
-    let counter = 0;
-    let node = this.head;
-    while (node) {
-      if (counter === index) {
-        return node;
-      }
-
-      counter++;
+    while (node.next !== last) {
       node = node.next;
     }
-    return null;
+    node.next = null;
+    this.length--;
+    return last;
   }
-
-  removeAt(index) {
+  push(data) {
     if (!this.head) {
-      return;
+      return this.unshift(data);
     }
-
-    if (index === 0) {
-      this.head = this.head.next;
-      return;
-    }
-
-    const previous = this.getAt(index - 1);
-    if (!previous || !previous.next) {
-      return;
-    }
-    previous.next = previous.next.next;
+    this.getLast().next = new Node(data);
+    this.length++;
   }
-
-  insertAt(data, index) {
-    if (!this.head) {
-      this.head = new Node(data);
-      return;
+  get(index) {
+    if (index >= this.length || index < 0) {
+      return null;
     }
-
-    if (index === 0) {
-      this.head = new Node(data, this.head);
-      return;
+    let node = this.head;
+    let counter = 0;
+    while (index !== counter) {
+      node = node.next;
+      counter++;
     }
-
-    const previous = this.getAt(index - 1) || this.getLast();
-    const node = new Node(data, previous.next);
-    previous.next = node;
+    return node;
   }
+  set(index, data) {
+    if (!this.get(index)) {
+      return false;
+    }
+    this.get(index).data = data;
+    return true;
+  }
+  remove(index) {
+    if (!this.get(index)) {
+      return null;
+    }
+    if (index === 0) {
+      return this.shift();
+    }
+    const removed = this.get(index);
+    this.get(index - 1).next = removed.next;
+    this.length--;
+    return removed;
+  }
+  insert(index, data) {
+    if (index > this.length || index < 0) {
+      return false;
+    }
+    if (index === 0) {
+      this.unshift(data);
+      return true;
+    }
+    this.get(index - 1).next = new Node(data, this.get(index));
+    this.length++;
+    return true;
+  }
+  reverse() {
+    // for (let i = 0; i < this.length; i++) {
+    //   this.insert(i, this.pop().data);
+    // }
 
+    // let prev = null;
+    // let current = this.head;
+    // while (current) {
+    //   const temp = current.next;
+    //   current.next = prev;
+    //   prev = current;
+    //   current = temp;
+    // }
+    // this.head = prev;
+
+    let prev = null;
+    let current = this.head;
+    const size = this.length;
+    for (let i = 0; i < size; i++) {
+      const temp = current.next;
+      current.next = prev;
+      prev = current;
+      current = temp;
+    }
+    this.head = prev;
+  }
   forEach(fn) {
     let node = this.head;
-    let counter = 0;
     while (node) {
-      fn(node, counter);
-      node = node.next;
-      counter++;
-    }
-  }
-
-  *[Symbol.iterator]() {
-    let node = this.head;
-    while (node) {
-      yield node;
+      fn(node);
       node = node.next;
     }
   }
