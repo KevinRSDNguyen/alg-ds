@@ -5,6 +5,7 @@
 // --- Examples
 // caeserCipher("abcd", 1) === "bcde";
 // caeserCipher("yz", 1) === "za";
+// caeserCipher("abcd", 100) === "wxyz";
 // caeserCipher("gurer ner 9 qbtf!", 13) === "there are 9 dogs!"
 // caeserCipher("V ybir WninFpevcg!", 13) === "I love JavaScript!";
 
