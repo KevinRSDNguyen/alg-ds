@@ -13,9 +13,10 @@ test("Queue has behavior of first in first out", () => {
   q.enqueue(2);
   q.enqueue(3);
   expect(q.dequeue()).toEqual(1);
+  q.enqueue("Seattle");
   expect(q.dequeue()).toEqual(2);
   expect(q.dequeue()).toEqual(3);
-  expect(q.dequeue()).toBeFalsy();
+  expect(q.dequeue()).toEqual("Seattle");
 });
 
 test("peek() returns next element to be removed from Queue", () => {
