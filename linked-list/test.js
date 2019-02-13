@@ -263,20 +263,22 @@ describe.skip("reverse()", () => {
   });
 });
 
-describe.skip("forEach()", () => {
+describe("forEach()", () => {
   test("calls function provided to it on each node", () => {
     const l = new List();
 
-    l.push(1);
-    l.push(2);
-    l.push(3);
+    l.push(10);
+    l.push(20);
+    l.push(30);
 
-    l.forEach(node => {
-      node.data += 1;
+    l.forEach((node, index) => {
+      if (index % 2 === 0) {
+        node.data += 1;
+      }
     });
 
-    expect(l.get(0).data).toEqual(2);
-    expect(l.get(1).data).toEqual(3);
-    expect(l.get(2).data).toEqual(4);
+    expect(l.get(0).data).toEqual(11);
+    expect(l.get(1).data).toEqual(20);
+    expect(l.get(2).data).toEqual(31);
   });
 });
