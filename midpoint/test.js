@@ -3,6 +3,11 @@ const L = require("./linkedlist");
 const Node = L.Node;
 const LinkedList = L.LinkedList;
 
+test("Returns null on empty list.", () => {
+  const l = new LinkedList();
+  expect(midpoint(l)).toBeFalsy();
+});
+
 describe("Returns the middle node of list with odd number of nodes", () => {
   test("on list with 5 nodes.", () => {
     const l = new LinkedList();
