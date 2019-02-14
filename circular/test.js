@@ -3,6 +3,11 @@ const L = require("./linkedlist");
 const List = L.LinkedList;
 const Node = L.Node;
 
+test("returns false on an empty list.", () => {
+  const l = new List();
+  expect(circular(l)).toEqual(false);
+});
+
 test("returns true for circular linked lists", () => {
   const l = new List();
   l.push("a");
