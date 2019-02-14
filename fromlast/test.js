@@ -14,3 +14,15 @@ test("fromLast() works", () => {
 
   expect(fromLast(l, 3).data).toEqual(2);
 });
+
+test("fromLast(list, steps) returns null on out of bound steps", () => {
+  const l = new List();
+
+  l.push("A");
+  l.push("B");
+  l.push("C");
+  l.push("D");
+  l.push("E");
+
+  expect(fromLast(l, 1000)).toBeFalsy();
+});
